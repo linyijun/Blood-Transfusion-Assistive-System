@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en"  ng-app="myApp">
+<head>
+	<meta charset="utf-8" />
+
+  	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+	<!-- Latest compiled and minified JavaScript -->
+
+    <link href="./charisma-app.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css">
+
+	<link href="https://cdn.bootcss.com/bootstrap-modal/2.2.6/css/bootstrap-modal.min.css" rel="stylesheet">
+	<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0" />
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.3/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.3/angular-resource.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.3/angular-route.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/3.5.3/echarts.min.js"></script>
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
+	<script src="https://cdn.bootcss.com/bootstrap-modal/2.2.6/js/bootstrap-modal.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+    <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+    <style type="text/css">
+		.block {
+			border: 1px solid #ccc;
+			background: white;
+			margin: 1em 0em;
+			border-top: none;
+		}
+
+		.block-content {
+			margin: 1em;
+			min-height: .25em;
+		}
+
+		.block-header {
+			margin-bottom: 0px;
+			border-right: none;
+			border-left: none;
+			-webkit-border-radius: 0px;
+			-moz-border-radius: 0px;
+			border-radius: 0px;
+		}
+		.block-header div {
+			padding-top: 10px;
+		}
+    </style>
+</head>
+<body ng-controller="appController">
+	<div class="page-header" style="margin-top: 0px; background-color: #f4f4f4; margin-bottom: 0px;">
+  		<div class="container-fluid" ng-submit="processForm()">
+  			<div class="row">
+  				<div class="col-xs-4 col-md-4 col-lg-4">
+				    <p style="margin-top: 20px; font-size: 20px; color: #3f5796; ">
+				    	Blood Transfusion Assistive System
+				    </p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container-fluid" style="margin-top: 20px;">
+		<div class="row">
+			<div class="col-xs-12 col-md-3 col-lg-3">
+				<div class="sidebar-nav">
+					<div class="nav-canvas">
+						<ul class="nav nav-pills nav-stacked main-menu">
+							<li style="font-size: 18px;"><a class="ajax-link" href="#/General" ng-click="sendtype('Anesthesiology')"><img src="./media/image/Anesthesiology.png" width="20px" height="20px" /><span> Anesthesiology</span></a>
+							</li>
+							<li style="font-size: 18px;"><a class="ajax-link" href="#/General" ng-click="sendtype('Cardiology')"><img src="./media/image/Cardiology.png" width="20px" height="20px" /><span> Cardiology</span></a>
+							</li>
+							<li style="font-size: 18px;"><a class="ajax-link" href="#/General" ng-click="sendtype('Cardiothoractic Surgery')"><img src="./media/image/Cardiothoractic-Surgery.png" width="20px" height="20px" /><span> Cardiothoractic Surgery</span></a>
+							</li>
+							<li style="font-size: 18px;"><a class="ajax-link" href="#/General" ng-click="sendtype('Colorectal Surgery')"><img src="./media/image/Colorectal-Surgery.png" width="20px" height="20px" /><span> Colorectal Surgery</span></a>
+							</li>
+							<li style="font-size: 18px;"><a class="ajax-link" href="#/General" ng-click="sendtype('Critical Care-trauma')"><img src="./media/image/Critical-Care-Trauma.png" width="20px" height="20px" /><span> Critical Care-trauma</span></a>
+							</li>
+							<li style="font-size: 18px;"><a class="ajax-link" href="#/General" ng-click="sendtype('ENT')"><img src="./media/image/ENT.png" width="20px" height="20px" /><span> ENT</span></a>
+							</li>
+							<li style="font-size: 18px;"><a class="ajax-link" href="#/General" ng-click="sendtype('Gastroenterology')"><img src="./media/image/Gastroenterology.png" width="20px" height="20px" /><span> Gastroenterology</span></a>
+							</li>
+							<li style="font-size: 18px;"><a class="ajax-link" href="#/General" ng-click="sendtype('General Surgery')"><img src="./media/image/General-Surgery.png" width="20px" height="20px" /><span> General Surgery</span></a>
+							</li>
+							<li style="font-size: 18px;"><a class="ajax-link" href="#/General" ng-click="sendtype('Interventional Radiology')"><img src="./media/image/Interventional-Radiology.png" width="20px" height="20px" /><span> Interventional Radiology</span></a>
+							</li>
+							<li style="font-size: 18px;"><a class="ajax-link" href="#/General" ng-click="sendtype('Neurology')"><img src="./media/image/Neurology.png" width="20px" height="20px" /><span> Neurology</span></a>
+							</li>
+							<li style="font-size: 18px;"><a class="ajax-link" href="#/General" ng-click="sendtype('Neurosurgery')"><img src="./media/image/Neurosurgery.png" width="20px" height="20px" /><span> Neurosurgery</span></a>
+							</li>
+							<li style="font-size: 18px;"><a class="ajax-link" href="#/General" ng-click="sendtype('Obgyn')"><img src="./media/image/Obgyn.png" width="20px" height="20px" /><span> Obgyn</span></a>
+							</li>
+							<li style="font-size: 18px;"><a class="ajax-link" href="#/General" ng-click="sendtype('Opthalmology')"><img src="./media/image/Opthalmology.png" width="20px" height="20px" /><span> Opthalmology</span></a>
+							</li>
+							<li style="font-size: 18px;"><a class="ajax-link" href="#/General" ng-click="sendtype('Orthopaedic Surgery')"><img src="./media/image/Orthopedics-Surgery.png" width="20px" height="20px" /><span> Orthopaedic Surgery</span></a>
+							</li>
+							<li style="font-size: 18px;"><a class="ajax-link" href="#/General" ng-click="sendtype('Plastic Surgery')"><img src="./media/image/Plastic-Surgery.png" width="20px" height="20px" /><span> Plastic Surgery</span></a>
+							</li>
+							<li style="font-size: 18px;"><a class="ajax-link" href="#/General" ng-click="sendtype('Pulmonology')"><img src="./media/image/Pulmonology.png" width="20px" height="20px" /><span> Pulmonology</span></a>
+							</li>
+							<li style="font-size: 18px;"><a class="ajax-link" href="#/General" ng-click="sendtype('Spine Surgery')"><img src="./media/image/Spine-Surgery.png" width="20px" height="20px" /><span> Spine Surgery</span></a>
+							</li>
+							<li style="font-size: 18px;"><a class="ajax-link" href="#/General" ng-click="sendtype('Surgical Oncology')"><img src="./media/image/Surgical-Oncology.png" width="20px" height="20px" /><span> Surgical Oncology</span></a>
+							</li>
+							<li style="font-size: 18px;"><a class="ajax-link" href="#/General" ng-click="sendtype('Thoracic Surgery')"><img src="./media/image/Thoracic-Surgery.png" width="20px" height="20px" /><span> Thoracic Surgery</span></a>
+							</li>
+							<li style="font-size: 18px;"><a class="ajax-link" href="#/General" ng-click="sendtype('Transplanthepatobiliary')"><img src="./media/image/Transplanthepatobiliary.png" width="20px" height="20px" /><span> Transplanthepatobiliary</span></a>
+							</li>
+							<li style="font-size: 18px;"><a class="ajax-link" href="#/General" ng-click="sendtype('Transplanturology')"><img src="./media/image/Transplanturology.png" width="20px" height="20px" /><span> Transplanturology</span></a>
+							</li>
+							<li style="font-size: 18px;"><a class="ajax-link" href="#/General" ng-click="sendtype('Urology')"><img src="./media/image/Urology.png" width="20px" height="20px" /><span> Urology</span></a>
+							</li>
+							<li style="font-size: 18px;"><a class="ajax-link" href="#/General" ng-click="sendtype('Vascular Surgery')"><img src="./media/image/Vascular-Surgery.png" width="20px" height="20px" /><span> Vascular Surgery</span></a>
+							</li>							
+							<li style="font-size: 18px;"><a class="ajax-link" href="#/General" ng-click="sendtype('Other')"><img src="./media/image/Other.png" width="20px" height="20px" /><span> Other</span></a>
+							</li>
+					</div>
+				</div>
+			</div>
+			<div class="clearfix visible-xs"></div>
+			<div class="col-xs-12 col-md-9 col-lg-9">
+				<div ng-view></div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		'use strict';
+
+		var myapp = angular.module('myApp', ['ngRoute']);
+
+		myapp.factory('socket', function ($rootScope) {
+		    var socket = io.connect('http://localhost:3001/');
+		    return {
+		    	on: function (eventName, callback) {
+		        	socket.on(eventName, function () {  
+		          		var args = arguments;
+		          		$rootScope.$apply(function () {
+		            		callback.apply(socket, args);
+		          		});
+		        	});
+		      	},
+		      	emit: function (eventName, data, callback) {
+		        	socket.emit(eventName, data, function () {
+			          	var args = arguments;
+			          	$rootScope.$apply(function () {
+			            	if (callback) {
+			              		callback.apply(socket, args);
+			            	}
+			          	});
+		        	})
+		      	}
+		    };
+		});
+
+		myapp.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider){
+			$routeProvider
+				.when('/', {
+				})
+				.when('/General', {
+					template: document.getElementById('GeneralSurgeryView').text
+				})
+				.otherwise({redirectTo:'/General'});
+			$locationProvider.hashPrefix('');
+		}]);
+
+		myapp.controller('appController', function($scope, $http, $window, socket) {
+			$scope.legend = ["Berlin", "London",'New York','Tokyo'];  
+		    $scope.item = [];  
+		    $scope.data = [];  
+		    $scope.gdata = 10;  
+		    $scope.ymax = 20;
+		    $scope.age = {value: ""};
+		    $scope.INR = {value: ""};
+		    $scope.Count = {value: ""};
+		    $scope.Level = {value: ""};
+		   	$scope.datashadow = [];
+		   	$scope.myChart = undefined;
+		   	$scope.surg_type = '';
+
+		   	$scope.sendtype = function(type){
+		   		$scope.surg_type = type
+		   		console.log( $("#drid").get(0).selectedIndex);
+		   		$scope.age.value = '';
+		   		$scope.INR.value = '';
+		   		$scope.Count.value = '';
+		   		$scope.Level.value = '';
+				$('#drid').selectpicker('val', '');
+				$('#stype').selectpicker('val', '');
+		   		socket.emit('request_surgeon_data', {'data': type});
+		   	}
+
+		   	$scope.mysubmit = function(){
+		   		console.log($scope.age.value);
+		   		console.log($scope.INR.value);
+		   		console.log($scope.Count.value);
+		   		console.log($scope.Level.value);
+		   		console.log($('#drid').val());
+		   		console.log($('#stype').val());
+		   		var data = {
+						'SURGICAL_SPECIALTY': $scope.surg_type,
+						'age': $scope.age.value,
+						'Surgeon Hash Name': $('#drid').val(),
+						'PATIENT_TYPE': $('#stype').val(),
+						'SN - BM - Pre-Op INR': $scope.INR.value,
+						'SN - BM - Pre-Op Platelet Count': $scope.Count.value,
+						'ResultsBeforeSurgery': $scope.Level.value
+					}
+		   		socket.emit('request_RBC_data', data);
+		   	}
+
+		   	socket.on('RBC_data', function(result){
+		   		var option = {
+						    backgroundColor: 'white',
+						    tooltip : {
+						        formatter: "{a} <br/>{c} {b}"
+						    },
+						    series : [
+				        {
+				            type: 'gauge',
+				            min: (result.value-1.3).toFixed(2),
+				            max: (result.value+1.3).toFixed(2),
+				            axisLine:{
+				            	lineStyle:{
+				            		color: [[1,'#337ab7']]
+				            	}
+				            },
+				            detail: {formatter:'{value}'},
+				            data: [{value: result.value.toFixed(2), name:''}]
+				        }
+				    ]};
+		        
+		        var mychart = echarts.getInstanceByDom(document.getElementById('gmain'));
+		        mychart.setOption(option);
+		   	})
+
+		   	socket.on('doc_data', function(tdata){
+		   		//console.log(tdata);
+		   		tdata = JSON.parse(tdata)
+		   		console.log(tdata);
+		   		$scope.data = [];
+		   		$scope.item = [];
+		   		var temp = [];
+		   		for(var i in tdata){
+		   			console.log(tdata[i]);
+		   			$scope.item.push(i);
+		   			temp.push(tdata[i]);
+		   		}
+		   		$scope.data.push(temp);
+		   		console.log($scope.data);
+		   	})
+
+		   	$scope.$watch('data',  function(newValue, oldValue) {
+            	var option = {  
+		                // 提示框，鼠标悬浮交互时的信息提示  
+		                tooltip: {  
+		                    show: true,  
+		                    trigger: 'item'  
+		                },  
+		                // 横轴坐标轴  
+		                xAxis: [{  
+		                    type: 'category',  
+		                    data: $scope.item,
+					        axisLabel: {
+					            inside: false,
+					            textStyle: {
+					                color: 'black'
+					            }
+					        },
+					        axisTick: {
+					            show: false
+					        },
+					        axisLine: {
+					            show: false
+					        },  
+					        z: 10
+		                }],  
+		                // 纵轴坐标轴  
+		                yAxis: [{  
+					        axisLine: {
+					            show: false
+					        },
+					        axisTick: {
+					            show: false
+					        },
+					        axisLabel: {
+					            textStyle: {
+					                color: '#999'
+					            }
+					        }
+		                }],  
+		                // 数据内容数组  
+		                series: [           
+					        {
+					            type: 'bar',
+					            barWidth : 30,
+					            itemStyle: {
+					                normal: {
+					                    color: '#337ab7'
+					                    
+					                },
+					                emphasis: {
+					                    color: new echarts.graphic.LinearGradient(
+					                        0, 0, 0, 1,
+					                        [
+					                            {offset: 0, color: '#2378f7'},
+					                            {offset: 0.7, color: '#2378f7'},
+					                            {offset: 1, color: '#83bff6'}
+					                        ]
+					                    )
+					                }
+					            },
+					            data: $scope.data[0]
+					        }
+		                ]
+		            };  
+		            if(document.getElementById('main') == null)
+		            	return;
+		            var mychart = echarts.getInstanceByDom(document.getElementById('main'));
+		            mychart.setOption(option);
+
+					var drselect = $("#drid");
+					for(var i in $scope.item){
+						drselect.append("<option>"+$scope.item[i]+"</option>");
+					}
+					drselect.selectpicker('refresh');
+
+      		}, true);
+		});
+
+		myapp.directive('line', function() {  
+		    return {  
+		        scope: {  
+		            id: "@",  
+		            legend: "=",  
+		            item: "=",  
+		            data: "="  
+		        },  
+		        restrict: 'E',  
+		        template: '<div style="height:400px; width: 100%;"></div>',  
+		        replace: true,  
+		        link: function($scope, element, attrs, controller, socket) {  
+		        	console.log($scope.data);
+		            var option = {  
+		            };  
+		            $scope.myChart = echarts.init(document.getElementById($scope.id),'macarons');  
+		            $scope.myChart.setOption(option);  
+		            console.log($scope.id);
+
+					$(".selectpicker").selectpicker({
+					    "title": "Select Options",
+					    "width": '80%'      
+					}).selectpicker("render");
+		        }  
+		    };  
+		});   
+		myapp.directive('gauge', function() {  
+		    return {  
+		        scope: {  
+		            gid: "@",  
+		            gdata: "="  
+		        },  
+		        restrict: 'E',  
+		        template: '<div style="height:600px; width: 100%;"></div>',  
+		        replace: true,  
+		        link: function($scope, element, attrs, controller, socket) {  
+		        	console.log($scope.data);
+		            var option = {
+						    backgroundColor: 'white',
+						    tooltip : {
+						        formatter: "{a} <br/>{c} {b}"
+						    },
+
+						    series : [
+				        {
+				            type: 'gauge',
+				            axisLine:{
+				            	lineStyle:{
+				            		color: [[1,'#337ab7']]
+				            	}
+				            },
+				            detail: {formatter:'{value}'},
+				            data: [{value: 0, name: ''}]
+				        }
+				    ]};
+		            console.log($scope.gid);
+		            $scope.gChart = echarts.init(document.getElementById('gmain'));  
+		            $scope.gChart.setOption(option);
+
+		            console.log('11');    
+		        }  
+		    };  
+		}); 
+	</script>
+
+	<script type="text/ng-template" id="GeneralSurgeryView">
+		<div class="row-fluid">
+			<div class="panel panel-default">
+				<div class="panel-body" style="padding: 0 0 0 0;">
+					<div class="col-sm-12 col-lg-12" style="padding-left: 0px;">
+						<line id="main" legend="legend" item="item" data="data"></line>  
+					</div>
+					</div>
+				</div>
+			</div>
+		</div> 
+		<div class="row-fluid">
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<div class="col-sm-1 col-md-1 col-lg-1"></div>
+					<div class="col-sm-3 col-md-3 col-lg-3">
+						<div style="margin-top: 50px;">
+						<label style="font-size: 15px; ">Surgeon ID:</label><br>
+						<select class="selectpicker" data-live-search="true" title="Choose one of the following..." id="drid" >
+						</select>
+						</div>
+						<div>
+							<label style="font-size: 15px; margin-top: 5px;  margin-bottom: 5px; margin-right: 5px; ">Patient Type:</label><br>
+							<select class="selectpicker" data-live-search="true" title="Choose one of the following..." id="stype" width="auto" >
+							  <option>Day Surgery</option>
+							  <option>Observation</option>
+							  <option>Inpatient</option>
+							  <option>Outpatient in a Bed</option>
+							  <option>Extended Recovery</option>
+							  <option>Outpatient</option>
+							  <option>Preadmit</option>
+							  <option>Non Patient</option>
+							</select>
+						</div>
+						<div>
+							<label style="font-size: 15px; margin-top: 5px;  margin-bottom: 5px;" >Patient Age:</label><br>
+							<input type="text" class="form-control" id="age" placeholder="Patient Age" style="width: 80%; display: inline-block" ng-model="age.value">
+						</div>
+						<div>
+						<label  class="form-label" style="font-size: 15px; margin-top: 5px;  margin-bottom: 5px; ">INR:</label><br>
+						<input type="text" class="form-control" id="name" placeholder="INR" style="width: 80%; display: inline-block" ng-model="INR.value">
+						</div>
+						<div>
+						<label  class="form-label" style="font-size: 15px; margin-top: 5px;  margin-bottom: 5px;">Platelet Count:</label>
+						<input type="text" class="form-control" id="name" placeholder="Platelet Count" style="width: 80%;display: inline-block" ng-model="Count.value">
+						</div>
+						<div>
+						<label  class="form-label" style="font-size: 15px; margin-top: 5px;  margin-bottom: 5px;">Anemia Level:</label>
+						<input type="text" class="form-control" id="name" placeholder="Anemia Level" style="width: 80%; display: inline-block" ng-model="Level.value">
+						</div>
+						<div style="margin-top: 20px;">
+						<button class="btn btn-primary btn-md" style="margin: 0 auto;" ng-click="mysubmit()">Submit</button>
+						</div>
+					</div>
+					<div class="col-sm-8 col-md-8 col-lg-8">
+						<gauge  id="gmain" data="gdata"></gauge>
+					</div>
+				</div>
+			</div>
+		</div>
+	</script>
+    <!-- Latest compiled and minified CSS -->
+
+</body>
+</html>
