@@ -17,6 +17,9 @@ index_b.html is front end of the system</br>
 Y.X.L-Demo.gif is a small demo that introduces how to use our system</br>
 
 ### How to use
-To use our system, you need to open server localhost on your side</br>
-Run the app.py and open the index_b.html</br>
+Run python app.py directly in the terminal 
+Open the index_b.html in the web page</br>
 Notice the port should keep the same</br>
+
+### Tools and Version
+Python 2.7
