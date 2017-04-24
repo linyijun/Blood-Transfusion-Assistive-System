@@ -10,13 +10,13 @@ Yijun Lin</br>
 We implemented a recommendation system of blood transfusion volume before a surgery.
 
 ### Introduction to files
-Y.X.L-code.py contains all codes of data preprocessing, data modeling, data visualization
-Y.X.L-code.html is the html version of Y.X.L-code.py
-app.py is back end of the system
-index_b.html is front end of the system
-Y.X.L-Demo.gif is a small demo that introduces how to use our system
+Y.X.L-code.py contains all codes of data preprocessing, data modeling, data visualization</br>
+Y.X.L-code.html is the html version of Y.X.L-code.py</br>
+app.py is back end of the system</br>
+index_b.html is front end of the system</br>
+Y.X.L-Demo.gif is a small demo that introduces how to use our system</br>
 
 ### How to use
-To use our system, you need to open server localhost on your side. 
-Run the app.py and open the index_b.html
-Notice the port should be equaled
+To use our system, you need to open server localhost on your side</br>
+Run the app.py and open the index_b.html</br>
+Notice the port should keep the same</br>
