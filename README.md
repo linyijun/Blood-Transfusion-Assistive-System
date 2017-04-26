@@ -17,7 +17,7 @@ index_b.html is front end of the system</br>
 Y.X.L-Demo.gif is a small demo that introduces how to use our system</br>
 
 ### How to use
-Run python app.py directly in the terminal 
+Run python app.py directly in the terminal</br>
 Open the index_b.html in the web page</br>
 Notice the port should keep the same</br>
 
