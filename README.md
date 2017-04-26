@@ -21,5 +21,9 @@ Run python app.py directly in the terminal
 Open the index_b.html in the web page</br>
 Notice the port should keep the same</br>
 
-### Tools and Version
-Python 2.7
+### Introduction to tools
+Coding language : Python, JavaScript</br>
+Package : KERAS, pandas, Scikit-Learn</br>
+Tools : iPython, Jupyter Notebook</br>
+Algorithms : KNN, Random Forest, Neural Network</br>
+
